@@ -86,7 +86,7 @@ comment: true
 # 来必力 uid
 # livere_uid:
 # gitment 用户主，即 GitHub 用户名
-gitment_owner: mengtingxu1203
+gitment_owner: MengtingXu1203
 # GitHub pages 仓库名，如：showzeng.github.io
 gitment_repo: mengtingxu1203.github.io
 # gitment 提供的对应 id 和 secret
