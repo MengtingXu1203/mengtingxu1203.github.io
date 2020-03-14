@@ -43,7 +43,7 @@ show_excerpt: true
 # weibo: https://weibo.com/varen5201314
 github: https://github.com/mengtingxu1203
 # 邮件地址前面带上 mailto:
-email: xumengting@nuaa.edu.cn
+email: mailto:xumengting@nuaa.edu.cn
 # RSS 订阅
 rss: true
 # --- 社交链接 ---
