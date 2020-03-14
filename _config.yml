@@ -15,13 +15,13 @@ defaults:
 
 # --- 网站信息设置 ---
 # 下面填写你的博客标题
-title: selous个人简介
+title: MengtingXu个人简介
 # 下面填写你的网络常用名
-name: selous
+name: Molly
 # 下面填写你的座右铭或者是个性签名
-description: 编程之久除了算法和数据结构，什么也不属于我们.
+description: 编程之久除了数学，什么也不属于我们.
 # 你博客的 url 地址，比如：https://selous123.github.io 或者是自定义的域名
-url: https://selous123.github.io
+url: https://mengtingxu.github.io
 # 在页尾的版权时间信息，比如：2016-2018，默认是 2018 年
 copyright_time: 2020
 # 标签页的 logo 及博客的头像，如果你想引用网络图片资源，就取消下面的注解，并填写图片资源的 url 地址
@@ -41,9 +41,9 @@ show_excerpt: true
 # 取消下面的注解，并填写相应的你要开启的社交链接
 #twitter: https://twitter.com/showzeng
 # weibo: https://weibo.com/varen5201314
-github: https://github.com/selous123
+github: https://github.com/mengtingxu1203
 # 邮件地址前面带上 mailto:
-email: lrhselous@163.com
+email: xumengting@nuaa.edu.cn
 # RSS 订阅
 rss: true
 # --- 社交链接 ---
@@ -86,9 +86,9 @@ comment: true
 # 来必力 uid
 # livere_uid:
 # gitment 用户主，即 GitHub 用户名
-gitment_owner: selous123
+gitment_owner: mengtingxu1203
 # GitHub pages 仓库名，如：showzeng.github.io
-gitment_repo: selous123.github.io
+gitment_repo: mengtingxu1203.github.io
 # gitment 提供的对应 id 和 secret
 gitment_client_id: 76bb22ffd69cb9a2dc11
 gitment_secret: 1bc48766be80fbcb2802679ab796d76ac4fafe44
