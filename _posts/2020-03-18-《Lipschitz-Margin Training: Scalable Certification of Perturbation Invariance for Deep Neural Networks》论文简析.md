@@ -1,5 +1,6 @@
 ---
-title: 《Lipschitz-Margin Training: Scalable Certification of Perturbation Invariance for Deep Neural Networks》论文简析
+title: 
+《Lipschitz-Margin Training Scalable Certification of Perturbation Invariance for Deep Neural Networks》简析
 date:  2020-03-18 00:14:13 +0800
 category: Certified Robustness 
 tags: Lipschitz constraint
@@ -113,15 +114,18 @@ $$ \forall i \ne t_X, (F_{t_X} \ge F_i + \sqrt2 c L_F )$$
 为了以有效的计算过程确保广泛网络的扰动不变性，作者实现了以下目标。
 
 1.为神经网络的每个component（Linear，pooling，activation）提供了一般的和更紧的谱范数。
+
 2.介绍了算子范数上限及其可微近似的通用快速算法。
+
 3.我们提出了一种训练算法，可以有效地限制网络的平滑性，并获得更好的认证和针对攻击的鲁棒性。
+
 4.成功地为小型到大型网络提供了重要的认证，而计算成本却可以忽略不计。
 
 作者相信，这项工作将成为朝着可认证且强大的深度学习模型迈出的重要一步。 将开发的技术应用于其他Lipschitz相关领域，例如GAN训练或带有嘈杂标签的训练，是未来的工作。
 
 #### Reference
 
-[1]. https://papers.nips.cc/paper/7889-lipschitz-margin-training-scalable-certification-of-perturbation-invariance-for-deep-neural-networks.pdf
+[1]https://papers.nips.cc/paper/7889-lipschitz-margin-training-scalable-certification-of-perturbation-invariance-for-deep-neural-networks.pdf
 
 
 
