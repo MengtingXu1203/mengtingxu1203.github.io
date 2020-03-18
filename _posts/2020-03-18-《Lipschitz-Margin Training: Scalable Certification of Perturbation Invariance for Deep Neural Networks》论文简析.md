@@ -1,5 +1,5 @@
 ---
-title: Lipschitz-Margin Training Scalable Certification of Perturbation Invariance for Deep Neural Networks 论文简析
+title: Lipschitz-Margin Training  论文简析
 date:  2020-03-18 00:14:13 +0800
 category: Certified Robustness 
 tags: Lipschitz constraint
@@ -76,17 +76,17 @@ $$ \forall i \ne t_X, (F_{t_X} \ge F_i + \sqrt2 c L_F )$$
 
 ##### （1）more tighter
 
-<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/component_tight.png" width="500" height="200"/></center>
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/component_tight.png" width="500" height="auto"/></center>
 
 左图：在原始模型中第二个卷积层的Lipschitz bound，中间：在用LMT训练后的模型中第二个卷积层的Lipschitz bound，右图：不同pooling 层的Lipschitz bound。比较前两个子图，可以发现，经过LMT训练的模型每个component都有改进，这导致整个网络的Lipschitz常数的上界存在显着差异（具有更紧的bound）。
 
 ###### * analysis of tightness
 
-<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/analysis_tight.png" width="700" height="100"/></center>
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/analysis_tight.png" width="700" height="auto"/></center>
 
 令$L$为通过该论文计算的Lipschitz常数的上界。$L_{local}，L_{global}$为局部和全局Lipschitz常数。则根据Lipschitz约束条件，可以很容易得到上式。
 
-<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/comparison_tight.png" width="700" height="200"/></center>
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/comparison_tight.png" width="700" height="auto"/></center>
 
 该图显示了结果。对于没有正则化的模型，<font color = 'red'>(i)-(iii)中的估计错误率分别为39.9、1.13和1.82(怎么根据图得出来的，还是不根据图?)</font>。这表明，即使我们可以用可能相当大的计算成本为每个数据点精确计算局部Lipschitz常数，不等式（iii）也会比DeepFool发现的对抗性扰动的大小松散1.8倍以上。
 
@@ -106,7 +106,7 @@ $$ \forall i \ne t_X, (F_{t_X} \ge F_i + \sqrt2 c L_F )$$
 
 ##### （3）抵御攻击性能
 
-<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/attack.png" width="700" height="200"/></center>
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/attack.png" width="700" height="auto"/></center>
 
 #### 2.6 结论
 
