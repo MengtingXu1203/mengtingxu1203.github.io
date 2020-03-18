@@ -1,6 +1,5 @@
 ---
-title: 
-《Lipschitz-Margin Training Scalable Certification of Perturbation Invariance for Deep Neural Networks》简析
+title: Lipschitz-Margin Training Scalable Certification of Perturbation Invariance for Deep Neural Networks 论文简析
 date:  2020-03-18 00:14:13 +0800
 category: Certified Robustness 
 tags: Lipschitz constraint
