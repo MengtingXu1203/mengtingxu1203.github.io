@@ -2,7 +2,7 @@
 title: Lipschitz-Margin Training  论文简析
 date:  2020-03-18 00:14:13 +0800
 category: Certified Robustness 
-tags: Lipschitz constraint
+tags: Lipschitz-constraint
 excerpt: Lipschitz Margin
 mathjax: true
 ---
@@ -76,7 +76,7 @@ $$ \forall i \ne t_X, (F_{t_X} \ge F_i + \sqrt2 c L_F )$$
 
 ##### （1）more tighter
 
-<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/component_tight.png" width="500" height="auto"/></center>
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/component_tight.png" width="800" height="auto"/></center>
 
 左图：在原始模型中第二个卷积层的Lipschitz bound，中间：在用LMT训练后的模型中第二个卷积层的Lipschitz bound，右图：不同pooling 层的Lipschitz bound。比较前两个子图，可以发现，经过LMT训练的模型每个component都有改进，这导致整个网络的Lipschitz常数的上界存在显着差异（具有更紧的bound）。
 
@@ -116,7 +116,7 @@ $$ \forall i \ne t_X, (F_{t_X} \ge F_i + \sqrt2 c L_F )$$
 
 2.介绍了算子范数上限及其可微近似的通用快速算法。
 
-3.我们提出了一种训练算法，可以有效地限制网络的平滑性，并获得更好的认证和针对攻击的鲁棒性。
+3.提出了一种训练算法，可以有效地限制网络的平滑性，并获得更好的认证和针对攻击的鲁棒性。
 
 4.成功地为小型到大型网络提供了重要的认证，而计算成本却可以忽略不计。
 
