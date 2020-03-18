@@ -4,6 +4,7 @@ date:  2020-03-18 00:14:13 +0800
 category: Certified Robustness 
 tags: Lipschitz constraint
 excerpt: Lipschitz Margin
+mathjax: true
 ---
 
 ### 1.关于 Lipschitz constraint
@@ -74,6 +75,57 @@ $$ \forall i \ne t_X, (F_{t_X} \ge F_i + \sqrt2 c L_F )$$
 #### 2.5 实验结果
 
 ##### （1）more tighter
+
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/component_tight.png" width="500" height="200"/></center>
+
+左图：在原始模型中第二个卷积层的Lipschitz bound，中间：在用LMT训练后的模型中第二个卷积层的Lipschitz bound，右图：不同pooling 层的Lipschitz bound。比较前两个子图，可以发现，经过LMT训练的模型每个component都有改进，这导致整个网络的Lipschitz常数的上界存在显着差异（具有更紧的bound）。
+
+###### * analysis of tightness
+
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/analysis_tight.png" width="700" height="100"/></center>
+
+令$L$为通过该论文计算的Lipschitz常数的上界。$L_{local}，L_{global}$为局部和全局Lipschitz常数。则根据Lipschitz约束条件，可以很容易得到上式。
+
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/comparison_tight.png" width="700" height="200"/></center>
+
+该图显示了结果。对于没有正则化的模型，<font color = 'red'>(i)-(iii)中的估计错误率分别为39.9、1.13和1.82(怎么根据图得出来的，还是不根据图?)</font>。这表明，即使我们可以用可能相当大的计算成本为每个数据点精确计算局部Lipschitz常数，不等式（iii）也会比DeepFool发现的对抗性扰动的大小松散1.8倍以上。
+
+在AT模型中，差异超过2.4。
+
+另一方面，在LMT模型中，(i)-(iii)中的估计错误率分别为1.42、1.02和1.15。发现的对抗性扰动的大小与可证明的鲁棒区域之间的总体中位数误差为1.72。
+
+这表明当我们使用LMT时，受过训练的网络变得平滑，并且基于Lipschitz常数的认证变得更加严格。这也导致更好的防御攻击能力。例如，对于非正则化模型，发现的对抗性扰动的中值为0.97，而在LMT模型中，可证明的鲁棒区域区域大小的中值为1.02。
+
+##### （2）Enlarge guarded area
+
+对于使用LMT训练的模型，对于一半以上的测试数据，可以确保鲁棒区域大于0.029。以前的工作仅在小型网络中提供了此证明。
+
+<font color = 'red'>LMT与其他方法之间主要有两个区别。首先，LMT扩大了prediction margin。其次，LMT对批量归一化层进行正则化，而在其他方法中，批量归一化层则取消权重矩阵和卷积层核的正则化。</font>
+
+作者还进行了其他实验，以提供对该网络的进一步认证。首先，将卷积替换为内核大小1，将步幅2替换为大小为2的平均池，并将卷积替换为内核大小1。然后，使用$c=0.1$的LMT。结果，尽管准确性下降到86％，但可证明的鲁棒区域的中值大于0.08。这对应于在通常的图像比例（0–255）中将400个输入元素更改为±1不会导致训练网络的误差超过50％。这些认证是不平凡的，据所知，这是为此大型网络提供的最佳认证。
+
+##### （3）抵御攻击性能
+
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-LMT/attack.png" width="700" height="200"/></center>
+
+#### 2.6 结论
+
+为了以有效的计算过程确保广泛网络的扰动不变性，作者实现了以下目标。
+
+1.为神经网络的每个component（Linear，pooling，activation）提供了一般的和更紧的谱范数。
+2.介绍了算子范数上限及其可微近似的通用快速算法。
+3.我们提出了一种训练算法，可以有效地限制网络的平滑性，并获得更好的认证和针对攻击的鲁棒性。
+4.成功地为小型到大型网络提供了重要的认证，而计算成本却可以忽略不计。
+
+作者相信，这项工作将成为朝着可认证且强大的深度学习模型迈出的重要一步。 将开发的技术应用于其他Lipschitz相关领域，例如GAN训练或带有嘈杂标签的训练，是未来的工作。
+
+#### Reference
+
+[1]. https://papers.nips.cc/paper/7889-lipschitz-margin-training-scalable-certification-of-perturbation-invariance-for-deep-neural-networks.pdf
+
+
+
+
 
 
 
