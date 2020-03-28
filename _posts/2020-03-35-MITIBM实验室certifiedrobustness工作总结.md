@@ -8,9 +8,7 @@ mathjax: true
 ---
 
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/overview.png" width="800" height="auto"/></center>
-
 <font color = 'gray'><center>图1.神经网络的鲁棒性评估算法和鲁棒性认证算法概述。</center></font>
-
 
 在这篇博客中，简要回顾了有关评估神经网络的鲁棒性及其研究进展的一些论文，重点是由MIT-IBM团队完成的工作。该研究进展如图1所示。然后，沿着这条线介绍了MIT-IBM实验室的四个贡献：第一个鲁棒性评估得分CLEVER，和三个鲁棒性下界认证算法，Fast-Lin和Fast-Lip用于<font color = 'blue'>包含ReLU激活的神经网络</font>，CROWN用于具有<font color = 'blue'>通用激活的神经网络</font>，而CNN-Cert用于<font color = 'blue'>通用卷积神经网络（CNN）体系结构</font>。
 
@@ -24,7 +22,6 @@ mathjax: true
 
 
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/overview_computation_time.png" width="800" height="auto"/></center>
-
 <font color = 'gray'><center>图2.鲁棒性认证算法之间的比较。</center></font>
 
 ### 2、Evaluating robustness of neural network with CLEVER
@@ -72,7 +69,7 @@ $$
 ||\delta||_p \le min\{\min_{j \ne c} \frac {f_c(x_0)-f_j(x_0)}{L_{q,x_0}^j},R\}
 $$
 
-$L_{q,x_0}^j$是$x_0$在范围$B_p(x_0,R):=\{x_0 \in R^d| \|\| x-x_0\|\|_p \le R\}$内的局部Lipschitz常数，$\delta \in B_p(0,R)$。
+$L_{q,x_0}^j$是$x_0$在范围$B_p(x_0,R):=\{x_0 \in R^d\| \|\| x-x_0\|\|_p \le R\}$内的局部Lipschitz常数，$\delta \in B_p(0,R)$。
 
 <font color = 'blue'>对于目标攻击，只需代入具体目标类$f_j(x_0)$即可。</font>
 
@@ -120,7 +117,6 @@ $$
 
 
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/overviewcnncert.png" width="800" height="auto"/></center>
-
 <font color = 'gray'><center>图3.CNN-Cert：具有针对通用CNN体系结构和各种构建块的鲁棒性认证，并且比其前身的Fast-Lin和CROWN算法更有效。</center></font>
 
 
@@ -132,7 +128,7 @@ CNN-Cert的工作原理与之前的CROWN和Fast-Lin相同。基本思想是使�
 令$\rho_{cert}$为要求的鲁棒范围下界，
 
 $$
-\forall \delta \in R^d, \|\|\delta\|\|_p \le \rho_{cert},argmax_i f_i(x_0+\delta)=c
+\forall \delta \in R^d, \|\delta\|_p \le \rho_{cert},argmax_i f_i(x_0+\delta)=c
 $$
 
 #### 4.2 计算$\rho_{cert}$
@@ -158,6 +154,7 @@ $$
 $$
 
 这样，可以得到每一层输出$\Phi^r$和输入$\Phi^{r-1}$之间的递推关系：
+
 $$
 \begin{aligned}
 &\Phi^r \le A_{U,act}^r * \Phi^{r-1} + B_{U,act}^r,\\
@@ -228,7 +225,6 @@ $$
 <font color = 'blue'>上面提到的各种$A,B$的上下界具体形式由图4给出。</font>
 
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/AB.png" width="800" height="auto"/></center>
-
 <font color = 'gray'><center>图4.$A_U$和$B_U$的表达。$A_L$和$B_L$具有与$A_U$和$B_U$完全相同的形式，但互换了$U$和$L$。</center></font>
 
 #### 4.3 全局bound形式
