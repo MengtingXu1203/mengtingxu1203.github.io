@@ -34,31 +34,44 @@ mathjax: true
 #### 2.1 该指标优点
 
 （1）与攻击方法无关；
+
 （2）适用于任何神经网络分类器；
+
 （3）具有强大的理论保证；
+
 （4）对于大型神经网络在计算上是可行的。实验表明，CLEVER得分与广泛的自然和防御网络的实用鲁棒性指标非常匹配。
 
 #### 2.2 实现方法：使用极值理论来近似估计基于采样的Lipschitz常数
 
 ##### 2.2.1 定义
 
-* **鲁棒性下界$\beta_L$:** 令$\Delta_{p,min}$是输入$x_0$的最小对抗扰动，则$\beta_L \le \Delta_{p,min}$是$\Delta_{p,min}$的下界，且任意扰动$||\delta||_p \le \beta_L$都不能愚弄网络。
+* **鲁棒性下界$\beta_L$:** 令$\Delta_{p,min}$是输入$x_0$的最小对抗扰动，则$\beta_L \le \Delta_{p,min}$是$\Delta_{p,min}$的下界，且任意扰动$\|\|\delta\|\|_p \le \beta_L$都不能愚弄网络。
 
-* **鲁棒性上界$\beta_U$:** 令$\Delta_{p,min}$是输入$x_0$的最小对抗扰动，则$\beta_L \ge \Delta_{p,min}$是$\Delta_{p,min}$的上界，且存在扰动$||\delta||_p \ge \beta_L$都可以使网络输出错误的结果。
+* **鲁棒性上界$\beta_U$:** 令$\Delta_{p,min}$是输入$x_0$的最小对抗扰动，则$\beta_L \ge \Delta_{p,min}$是$\Delta_{p,min}$的上界，且存在扰动$\|\|\delta\|\|_p \ge \beta_L$都可以使网络输出错误的结果。
 
 <font color = 'blue'>鲁棒性上界比较好找，我们只需构造一个能成功攻击网络的对抗攻击即可，所以我们现在来寻找鲁棒性下界。</font>
 
 * **Formal guarantee on lower bound $\beta_L$ for untargeted attack<font color ='red'>(全局Lipschitz性?)</font>:**
-$$||\delta||_p \le \min_{j \ne c} \frac {f_c(x_0)-f_j(x_0)}{L_q^j}$$
+
+$$
+||\delta||_p \le \min_{j \ne c} \frac {f_c(x_0)-f_j(x_0)}{L_q^j}
+$$
+
 即：
-$$\beta_L = \min_{j \ne c} \frac {f_c(x_0)-f_j(x_0)}{L_q^j}$$
+
+$$
+\beta_L = \min_{j \ne c} \frac {f_c(x_0)-f_j(x_0)}{L_q^j}
+$$
+
 $L_q^j$是函数$f_c(x_0)-f_j(x_0)$在$L_p$范数约束下的Lipschitz常数，${1\over p} + {1 \over q} =1$，$c$是模型输出的最大可能类。
 
 
 * **Formal guarantee on $\beta_L$ for untargeted attack<font color ='red'>(局部Lipschitz性?)</font>：**
+
 $$
 ||\delta||_p \le min\{\min_{j \ne c} \frac {f_c(x_0)-f_j(x_0)}{L_{q,x_0}^j},R\}
 $$
+
 $L_{q,x_0}^j$是$x_0$在范围$B_p(x_0,R):=\{x_0 \in R^d| \| x-x_0\|_p \le R\}$内的局部Lipschitz常数，$\delta \in B_p(0,R)$。
 
 <font color = 'blue'>对于目标攻击，只需代入具体目标类$f_j(x_0)$即可。</font>
@@ -73,22 +86,22 @@ $L_{q,x_0}^j$是$x_0$在范围$B_p(x_0,R):=\{x_0 \in R^d| \| x-x_0\|_p \le R\}$�
 * **极值理论(Fisher-Tippett-Gnedenko Theorem):**
 如果存在一系列实数对$(a_n,b_n)$，使得$a_n \gt 0$且$\lim_{n \rightarrow \infty} F_Y^n(a_ny+b_n)=G(y)$，其中$G$是non-degenerate分布函数，则$G$属于Gumbel类别(I型)，Fréchet类别(II型)或Reverse Weibull类别(III型)，其CDF如下：
 $$
-Gumbel class(Type I): G(y)=exp\{-exp[- \frac {y-a_W}{b_W}]\}, y \in R, 
-$$
-$$
-Fréchet class(Type II):G(y)=
+\begin{aligned}
+& Gumbel class(Type I): G(y)=exp\{-exp[- \frac {y-a_W}{b_W}]\}, y \in R,  \\
+&Fréchet class(Type II):G(y)=
 \begin{cases}
 0, & y \lt a_W, \\
 exp\{-(\frac{y-a_W}{b_W})^{-c_W}\}, & y \gt a_W,
-\end{cases}
-$$
-$$
-Reverse Weibull  class(Type III):G(y)=
+\end{cases}\\
+&Reverse Weibull  class(Type III):G(y)=
 \begin{cases}
 exp\{-(\frac{a_W-y}{b_W})^{-c_W}\}, & y \lt a_W,\\
 1, & y \gt a_W, 
-\end{cases}
+\end{cases} 
+\end{aligned}
 $$
+
+
 
 <font color = 'blue'>因为这边是求$max\|\nabla g(x^{(i)})\|_q$,即右端点，所以作者采用了第三种极值理论。</font>
 
@@ -116,7 +129,11 @@ CNN-Cert的工作原理与之前的CROWN和Fast-Lin相同。基本思想是使�
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/cnncertcomparison.png" width="800" height="auto"/></center>
 
 #### 4.1 定义
-令$\rho_{cert}$为要求的鲁棒范围下界，$\forall \delta \in R^d, \|\delta\|_p\le \rho_{cert},argmax_if_i(x_0+\delta)=c$
+令$\rho_{cert}$为要求的鲁棒范围下界，
+
+$$
+\forall \delta \in R^d, \|\|\delta\|\|_p \le \rho_{cert},argmax_i f_i(x_0+\delta)=c
+$$
 
 #### 4.2 计算$\rho_{cert}$
 
@@ -129,14 +146,22 @@ CNN-Cert的工作原理与之前的CROWN和Fast-Lin相同。基本思想是使�
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/act-conv.png" width="500" height="auto"/></center>
 
 令$\Phi^r$表示该块输出，$\Phi^{r-1}$表示该块输入，则有：
+
 $$
 \Phi^r = W^r *\sigma(\Phi^{r-1})
 $$
+
 对激活函数$\sigma(y)$实施两个线性边界约束：
+
 $$
 \alpha_L(y+\beta_L) \le \sigma(y) \le \alpha_U(y+\beta_U)
 $$
+
 这样，可以得到每一层输出$\Phi^r$和输入$\Phi^{r-1}$之间的递推关系：
+$$
+begin{aligend}
+$$
+
 $$
 \Phi^r \le A_{U,act}^r * \Phi^{r-1} + B_{U,act}^r, 
 $$
@@ -153,18 +178,21 @@ $$
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/residual.png" width="500" height="auto"/></center>
 
 由残差块属性，对于输入输出我们有：
+
 $$
-\Phi^{r+1}=W^{r+1}*\Phi^r+b^{r+1},
+\begin{aligned}
+&\Phi^{r+1}=W^{r+1}*\Phi^r+b^{r+1}, \\
+&\Phi^{r+2}=W^{r+2}*\sigma(\Phi^{r+1})+b^{r+2}+\Phi^r.
+\end{aligned}
 $$
-$$
-\Phi^{r+2}=W^{r+2}*\sigma(\Phi^{r+1})+b^{r+2}+\Phi^r.
-$$
+
 利用激活函数约束，我们可以得到：
+
 $$
-\Phi^{r+2}\le A_{U,res}^{r+2}*\Phi^r+B_{U,res}^{r+2},
-$$
-$$
-\Phi^{r+2}\le A_{L,res}^{r+2}*\Phi^r+B_{L,res}^{r+2}.
+\begin{aligned}
+&\Phi^{r+2}\le A_{U,res}^{r+2}*\Phi^r+B_{U,res}^{r+2},\\
+&\Phi^{r+2}\le A_{L,res}^{r+2}*\Phi^r+B_{L,res}^{r+2}.
+\end{aligned}
 $$
 
 ##### 4.2.3 批归一化块
@@ -172,27 +200,32 @@ $$
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/bn.png" width="500" height="auto"/></center>
 
 我们有：
+
 $$
 \Phi^r = \gamma_{bn}{\frac {\Phi^{r-1}-\mu_{bn}}{\sqrt {\sigma_{bn}^2+\epsilon_{bn}}}}+\beta_{bn},
 $$
+
 可以得到：
+
 $$
 A_{L,bn}^r*\Phi^{r-1}+B_{L,bn}^r \le \Phi^r\le A_{U,bn}^r * \Phi^{r-1}+B_{U,bn}^r
 $$
 
 ##### 4.2.4 池化块
 针对最大池化，有：
+
 $$
 \Phi_n^r=\max_{S_n}\Phi_{S_n}^{r-1},
 $$
-可得到递推式：
-$$
-\Phi^r \le A_{U,pool}^r * \Phi^{r-1}+B_{U,pool}^r,
-$$
-$$
-\Phi^r \ge A_{L,pool}^r * \Phi^{r-1}+B_{L,pool}^r,
-$$
 
+可得到递推式：
+
+$$
+\begin{aligned}
+&\Phi^r \le A_{U,pool}^r * \Phi^{r-1}+B_{U,pool}^r,\\
+&\Phi^r \ge A_{L,pool}^r * \Phi^{r-1}+B_{L,pool}^r,
+\end{aligned}
+$$
 
 <font color = 'blue'>上面提到的各种$A,B$的上下界具体形式由图4给出。</font>
 
@@ -208,11 +241,12 @@ $$
 
 #### 4.4 约束在$B_p(x_0,\epsilon)$范围内的全局上下界
 输入$x$约束在以输入数据点$x_0$为中心且半径为$\epsilon$的$l_p$球$B_p(x_0,\epsilon)$内。因此，在$x\in B_p(x_0,\epsilon)$上最大化（最小化）上式的右侧（左侧）会导致第j个输出$\Phi_j^m(x)$的全局上限（下限）：
+
 $$
-\eta_{j,U}=\epsilon\|vec(A_U^0)\|_q+A_U^0*x_0+B_U^0,
-$$
-$$
-\eta_{j,L}=\epsilon\|vec(A_L^0)\|_q+A_L^0*x_0+B_L^0.
+\begin{aligned}
+&\eta_{j,U}=\epsilon\|vec(A_U^0)\|_q+A_U^0*x_0+B_U^0,\\
+&\eta_{j,L}=\epsilon\|vec(A_L^0)\|_q+A_L^0*x_0+B_L^0.
+\end{aligned}
 $$
 
 #### 4.5 确定可验证下界$\rho_{cert}$
@@ -226,9 +260,15 @@ $$
 
 ### Reference
 Robustness scores
+
 (1) CLEVER: https://arxiv.org/abs/1801.10578
+
 (2) CLEVER++: https://arxiv.org/abs/1810.08640
+
 Robustness certificates
+
 (1) Fast-Lin:https://arxiv.org/abs/1804.09699
+
 (2) CROWN: https://arxiv.org/abs/1811.00866
+
 (3) CNN-Cert: https://arxiv.org/abs/1811.12395
