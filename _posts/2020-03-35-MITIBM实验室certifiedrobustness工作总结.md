@@ -72,16 +72,16 @@ $$
 ||\delta||_p \le min\{\min_{j \ne c} \frac {f_c(x_0)-f_j(x_0)}{L_{q,x_0}^j},R\}
 $$
 
-$L_{q,x_0}^j$是$x_0$在范围$B_p(x_0,R):=\{x_0 \in R^d| \| x-x_0\|_p \le R\}$内的局部Lipschitz常数，$\delta \in B_p(0,R)$。
+$L_{q,x_0}^j$是$x_0$在范围$B_p(x_0,R):=\{x_0 \in R^d| \|\| x-x_0\|\|_p \le R\}$内的局部Lipschitz常数，$\delta \in B_p(0,R)$。
 
 <font color = 'blue'>对于目标攻击，只需代入具体目标类$f_j(x_0)$即可。</font>
 
 
 ##### 2.2.2 用极值理论求解鲁棒下界问题
 
-计算$L_q^j$的一种方法是对$x_0$周围的球$B_p(x_0,R)$中的一组点$x^{(i)}$进行采样，并取其中$\|\nabla g(x^{(i)})\|_q$的最大值。但是，可能需要大量样本才能获得对$max\|\nabla g(x^{(i)})\|_q$的良好估计，并且估计值与真实最大值相比有多好这是无从得知的。
+计算$L_q^j$的一种方法是对$x_0$周围的球$B_p(x_0,R)$中的一组点$x^{(i)}$进行采样，并取其中$\|\|\nabla g(x^{(i)})\|\|_q$的最大值。但是，可能需要大量样本才能获得对$max\|\|\nabla g(x^{(i)})\|\|_q$的良好估计，并且估计值与真实最大值相比有多好这是无从得知的。
 
-所以采用极值理论可确保随机变量的最大值只能遵循三个极值分布之一，这对于仅用少量样本估计$max\|\nabla g(x^{(i)})\|_q$很有用。
+所以采用极值理论可确保随机变量的最大值只能遵循三个极值分布之一，这对于仅用少量样本估计$max\|\|\nabla g(x^{(i)})\|\|_q$很有用。
 
 * **极值理论(Fisher-Tippett-Gnedenko Theorem):**
 如果存在一系列实数对$(a_n,b_n)$，使得$a_n \gt 0$且$\lim_{n \rightarrow \infty} F_Y^n(a_ny+b_n)=G(y)$，其中$G$是non-degenerate分布函数，则$G$属于Gumbel类别(I型)，Fréchet类别(II型)或Reverse Weibull类别(III型)，其CDF如下：
@@ -159,16 +159,14 @@ $$
 
 这样，可以得到每一层输出$\Phi^r$和输入$\Phi^{r-1}$之间的递推关系：
 $$
-begin{aligend}
+\begin{aligned}
+&\Phi^r \le A_{U,act}^r * \Phi^{r-1} + B_{U,act}^r,\\
+&\Phi^r \ge A_{L,act}^r * \Phi^{r-1} + B_{L,act}^r
+\end{aligned}
 $$
 
-$$
-\Phi^r \le A_{U,act}^r * \Phi^{r-1} + B_{U,act}^r, 
-$$
-$$
-\Phi^r \ge A_{L,act}^r * \Phi^{r-1} + B_{L,act}^r
-$$
 由此递推关系，我们可以得到输出$\Phi^r$和输入$x$之间的关系：
+
 $$
 A_{L,conv}^0 * x + B_L^0 \le \Phi^r(x) \le A_{U,conv}^0 * x + B_U^0
 $$
@@ -197,7 +195,7 @@ $$
 
 ##### 4.2.3 批归一化块
 
-<center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/bn.png" width="500" height="auto"/></center>
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/bn.png" width="300" height="auto"/></center>
 
 我们有：
 
@@ -229,7 +227,7 @@ $$
 
 <font color = 'blue'>上面提到的各种$A,B$的上下界具体形式由图4给出。</font>
 
-<center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/AB.png" width="500" height="auto"/></center>
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/AB.png" width="800" height="auto"/></center>
 
 <font color = 'gray'><center>图4.$A_U$和$B_U$的表达。$A_L$和$B_L$具有与$A_U$和$B_U$完全相同的形式，但互换了$U$和$L$。</center></font>
 
