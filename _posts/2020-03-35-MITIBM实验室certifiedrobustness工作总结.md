@@ -2,7 +2,7 @@
 title: MIT-IBM Watson AI Lab Certified Robustness 工作梳理
 date:  2020-03-25 22:22:13 +0800
 category: Certified Robustness 
-tags: Lipschitz-constraint and Linear-constraint
+tags: Lipschitz-constraint Linear-constraint
 excerpt: CLEVER, Fast-Lin, Fast-Lip, CROWN, and CNN-Cert
 mathjax: true
 ---
@@ -69,7 +69,7 @@ $$
 ||\delta||_p \le min\{\min_{j \ne c} \frac {f_c(x_0)-f_j(x_0)}{L_{q,x_0}^j},R\}
 $$
 
-$L_{q,x_0}^j$是$x_0$在范围$B_p(x_0,R):=\{x_0 \in R^d\| \|\| x-x_0\|\|_p \le R\}$内的局部Lipschitz常数，$\delta \in B_p(0,R)$。
+$L_{q,x_0}^j$是$x_0$在范围$B_p(x_0,R):=\lbrace x_0 \in R^d\| \quad \|\| x-x_0\|\|_p \le R\rbrace$内的局部Lipschitz常数，$\delta \in B_p(0,R)$。
 
 <font color = 'blue'>对于目标攻击，只需代入具体目标类$f_j(x_0)$即可。</font>
 
