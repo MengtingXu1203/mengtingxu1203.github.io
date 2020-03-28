@@ -16,6 +16,7 @@ mathjax: true
 
 ### 1、引言
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MIT-IBM/robustness.png" width="800" height="auto"/></center>
+
 假设攻击是$L_p$范数范围的，以前的工作已经证明，为ReLU网络找到最佳的经过验证的鲁棒性在计算上是很困难的，先前的一些工作试图找到神经网络的鲁棒性的下界。此处的“鲁棒性”的概念定义为在训练过的神经网络分类器上给定测试点的最小对抗扰动，这是该研究领域的常见设置。研究人员表明，可以使用网络权重矩阵的范数约束找到鲁棒性的下界，但对于深度网络而言，这些界限通常很小。Fast-Lin为全连接网络（多层感知器）引入了非平凡的鲁棒性边界。在数学上，后来引入的DeepZ和Neurify方法提供了与Fast-Lin等效或相似的界限。接下来，CROWN方法将范围扩展到常规激活函数，并增强了ReLU网络上的范围。就方法论而言，对于仅具有卷积层的ReLU网络，CROWN和DeepPoly具有相同的公式。图2中比较了它们的数值性能。
 
 
