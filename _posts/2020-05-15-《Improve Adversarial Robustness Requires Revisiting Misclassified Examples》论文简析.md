@@ -1,13 +1,11 @@
 ---
-title: [ICLR2020]MART 论文简析
+title: Improving Adversarial Robustness Requires Revisiting Misclassified Examples[ICLR2020]
 date:  2020-05-15 00:14:13 +0800
 category: Adversarial Defense
 tags: adversarial defense
 excerpt: Adversarial training with misclassified examples
 mathjax: true
 ---
-
-## Improving Adversarial Robustness Requires Revisiting Misclassified Examples [ICLR2020]
 
 Yisen Wang, Difan Zou, Jinfeng Yi, James Bailey, Xingjun Ma, Quanquan Gu
 
