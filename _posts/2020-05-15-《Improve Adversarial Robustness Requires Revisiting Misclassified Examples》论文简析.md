@@ -27,14 +27,13 @@ $$
 
 其中$h_\theta(x_i^,)$代表网络对于对抗样本$x_i^,$的概率预测值，$y_i$是样本$x_i$的true label.
 
-(3) 对抗训练目前存在的一些难点：<font color = 'blue'>
+<font color = 'blue'>(3) 对抗训练目前存在的一些难点：
 
 * 模型需要更大的容量。（即简单的模型可以具有很高的自然准确性，但不太可能变得更健壮）。
 
 * 对抗训练的样本复杂度可能比自然训练高得多。
-* 对抗性的鲁棒性可能天生就与自然准确性背道而驰。
 
-</font>
+* 对抗性的鲁棒性可能天生就与自然准确性背道而驰。</font>
 
 (4) Recall that the formal definition of an adversarial example is conditioned on it being <font color ='blue'>correctly classified. From this perspective, adversarial examples generated from misclassified examples are “undefined”.</font> Most adversarial training variants neglect this distinction, where all training examples are treated equally in both the maximization and the minimization processes, regardless of whether or not they are correctly classified. 
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MART/1-2.png" width="800" height="auto"/></center>
