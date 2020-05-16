@@ -12,24 +12,31 @@ Yisen Wang, Difan Zou, Jinfeng Yi, James Bailey, Xingjun Ma, Quanquan Gu
 Shanghai Jiao Tong University, University of California, Los Angles, JD.com, The University of Melbourne
 
 ### 1、引言
-* Deep neural networks (DNNs) are extremely vulnerable to adversarial examples crafted by adding small adversarial perturbations to natural examples.
-虽然现在深度学习网络已经在各个领域展现出优良的性能，但它被证实易受到对抗样本的攻击，我们往往可以通过在原始图片上增加一个人眼不可见的扰动使网络已较高的置信度输出一个错误的结果，考虑到对抗样本对于深度学习模型部署到现实世界中的危害（例如无人驾驶，医疗诊断等），构造良好的防御策略十分重要。
+(1) Deep neural networks (DNNs) are extremely vulnerable to adversarial examples crafted by adding small adversarial perturbations to natural examples.虽然现在深度学习网络已经在各个领域展现出优良的性能，但它被证实易受到对抗样本的攻击，我们往往可以通过在原始图片上增加一个人眼不可见的扰动使网络已较高的置信度输出一个错误的结果，考虑到对抗样本对于深度学习模型部署到现实世界中的危害（例如无人驾驶，医疗诊断等），构造良好的防御策略十分重要。
 
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MART/1-1.png" width="800" height="auto"/></center>
 <font color = 'gray'><center>图1.对抗样本攻击网络示意图。</center></font>
 
 
-* 与特征压缩，输入去噪和对抗检测等前向后向处理方法相比，已提出了几种防御技术来训练DNN，这些防御方法固有地对对抗示例具有鲁棒性，包括防御蒸馏，模型压缩。
+(2) 与特征压缩，输入去噪和对抗检测等前向后向处理方法相比，已提出了几种防御技术来训练DNN，这些防御方法固有地对对抗示例具有鲁棒性，包括防御蒸馏，模型压缩。
 Among all the defense method, adversarial training has been demonstrated to be the most effective. Adversarial training can be regarded as <font color = 'blue'>a data augmentation technique that trains DNNs on adversarial examples, and can be viewed as solving the following min-max optimization problem:</font>
- $$\min_\theta \frac{1}{n} \sum_{i=1}^n \max_{||x_i^, - x_i||_p \le \epsilon} l(h_\theta(x_i^,),y_i)$$
+
+$$
+\min_\theta \frac{1}{n} \sum_{i=1}^n \max_{||x_i^, - x_i||_p \le \epsilon} l(h_\theta(x_i^,),y_i)
+$$
+
 其中$h_\theta(x_i^,)$代表网络对于对抗样本$x_i^,$的概率预测值，$y_i$是样本$x_i$的true label.
 
-* 对抗训练目前存在的一些难点：<font color = 'blue'>
-（1）模型需要更大的容量。（即简单的模型可以具有很高的自然准确性，但不太可能变得更健壮）。
-（2）对抗训练的样本复杂度可能比自然训练高得多。
-（3）对抗性的鲁棒性可能天生就与自然准确性背道而驰。</font>
+(3) 对抗训练目前存在的一些难点：<font color = 'blue'>
 
-* Recall that the formal definition of an adversarial example is conditioned on it being <font color ='blue'>correctly classified. From this perspective, adversarial examples generated from misclassified examples are “undefined”.</font> Most adversarial training variants neglect this distinction, where all training examples are treated equally in both the maximization and the minimization processes, regardless of whether or not they are correctly classified. 
+* 模型需要更大的容量。（即简单的模型可以具有很高的自然准确性，但不太可能变得更健壮）。
+
+* 对抗训练的样本复杂度可能比自然训练高得多。
+* 对抗性的鲁棒性可能天生就与自然准确性背道而驰。
+
+</font>
+
+(4) Recall that the formal definition of an adversarial example is conditioned on it being <font color ='blue'>correctly classified. From this perspective, adversarial examples generated from misclassified examples are “undefined”.</font> Most adversarial training variants neglect this distinction, where all training examples are treated equally in both the maximization and the minimization processes, regardless of whether or not they are correctly classified. 
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-MART/1-2.png" width="800" height="auto"/></center>
 
 基于此，作者探索了能被原始网络正确分类的样本和不能被网络正确分类的样本对于对抗训练的差异性。把错误分类的样本记为 $\mathcal{S}^-$,把能正确分类的样本记为$\mathcal{S}^+$。
@@ -80,8 +87,8 @@ min_\theta\mathcal{R}_{misc}(h_\theta):&=\frac{1}{n}(\sum_{i\in\mathcal{S}_{h_\t
 \end{aligned}
 $$
 
-**<font color = 'blue'>$\frac{1}{n}\sum_{i=1}^n\{\Bbb{1}(h_\theta(x_i)\ne h_\theta(\hat{x_i^,}))*\Bbb{1}(h_\theta(x_i)\ne y_i)\}
-$即为*misclassification aware regularization*。</font>**
+<font color = 'blue'>$\frac{1}{n}\sum_{i=1}^n\{\Bbb{1}(h_\theta(x_i)\ne h_\theta(\hat{x_i^,}))*\Bbb{1}(h_\theta(x_i)\ne y_i)\}
+$即为misclassification aware regularization。</font>
 
 #### 2.2 误分类感知对抗训练（Misclassification Aware Adversarial Training(MART)）
 
@@ -91,6 +98,7 @@ $即为*misclassification aware regularization*。</font>**
 (1) $\Bbb{1}(h_\theta(\hat{x_i^,})\ne y_i)$
 
 作者建议使用增强型交叉熵（boosted cross entropy BCE）损失作为替代损失，而不是常用的CE损失。这主要是因为将对抗样本进行分类比自然样本需要更强的分类器，因为对抗样本的存在使分类决策边界变得更加复杂。建议的BCE损失定义为：
+
 $$
 BCE(P(\hat{x}_i^,,\theta),y_i)= -log(p_{y_i}(\hat{x}_i^,,\theta))-log(1-\max_{k\ne y_i}P_k(\hat{x}_i^,,\theta))
 $$
@@ -140,8 +148,11 @@ TRADES的目标函数还是自然损失和正则项的线性组合，这些结�
 最相关的工作是MMA，它建议对正确分类的示例使用maximal margin优化，同时对误分类样本的优化保持不变。<font color = 'blue'>具体来说，对于正确分类的样本，MMA在<font color = 'red'>对抗样本</font>中采用交叉熵损失。对于错误分类的示例，MMA直接将交叉熵损失应用于<font color = 'red'>原始样本</font>。</font>
 
 MART在以下方面与MMA有所不同：
+
 （1）MMA执行硬决策以从训练数据中识别错误分类的样本，而MART根据相应的输出概率$(p(\hat{x}^,,\theta))$，可以在培训过程中共同学习；
+
 （2）对于正确分类的样本，MMA对具有不同扰动极限的对抗样本采用交叉熵损失，而MART在具有相同扰动极限的对抗样本上采用建议的BCE损失；
+
 （3）对于错误分类的样本，MMA对原始样本采用交叉熵损失，而MART采用在对抗样本和原始样本上正则化的对抗损失。由于存在这些差异，稍后将在实验中证明MART优于MMA。
 
 ### 3、实验
