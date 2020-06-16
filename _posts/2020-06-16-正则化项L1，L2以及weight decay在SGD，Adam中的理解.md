@@ -13,7 +13,7 @@ mathjax: true
 
 所谓欠拟合（under-fitting)，与过拟合恰好相反，模型学习的太过粗糙，连训练集中的样本数据特征关系（数据分布）都没有学出来。
 
-<font color = 'blue'>解决过拟合的方法主要有以下几种</font>
+##### <font color = 'blue'> 解决过拟合的方法主要有以下几种:</font>
 
 <font color = 'blue'>(1) 数据层面：</font>
 
