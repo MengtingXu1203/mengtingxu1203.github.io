@@ -13,7 +13,7 @@ mathjax: true
 
 所谓欠拟合（under-fitting)，与过拟合恰好相反，模型学习的太过粗糙，连训练集中的样本数据特征关系（数据分布）都没有学出来。
 
-<font color = 'blue'>解决过拟合的方法主要有以下几种：</font>
+<font color = 'blue'>解决过拟合的方法主要有以下几种</font>:
 
 
 <font color = 'blue'>(1) 数据层面：</font>
@@ -35,8 +35,8 @@ mathjax: true
 
 ### 二、正则化方法：防止过拟合，提高模型泛化能力
 
-* L1正则化是指权值向量$w$中各个元素的绝对值之和，通常表示为$|w|_1$。
-* L2正则化是指权值向量$w$中各个元素的平方和然后再求平方根，通常表示为$|w|_2$
+* L1正则化是指权值向量$w$中各个元素的绝对值之和，通常表示为$\|w\|_1$。
+* L2正则化是指权值向量$w$中各个元素的平方和然后再求平方根，通常表示为$\|w\|_2$
 
 
 #### 2.1 为什么L1正则化可以产生稀疏模型（L1是怎么让系数等于0的）
@@ -49,7 +49,11 @@ $$
 
 其中$C_0$是原始的损失函数，加号后面的一项是L1正则化项，$\alpha$是正则化系数。注意到L1正则化是权值的绝对值之和，$C$是带有绝对值符号的函数，因此$C$是不完全可微的。机器学习的任务就是要通过一些方法（比如梯度下降）求出损失函数的最小值。当我们在原始损失函数$C_0$后添加L1正则化项时，相当于对$C_0$做了一个约束。<font color = 'blue'>此时我们的任务变成在正则化约束下求出$C_0$取最小值的解。</font>
 
-考虑二维的情况，即只有两个权值$w^1,w^2$,此时$L_1 = |w^1|+|w^2|$.对于梯度下降法，求解$C_0$的过程可以画出等值线，同时L1正则化的函数也可以在$w^1w^2$的二维平面上画出来。如下图：
+考虑二维的情况，即只有两个权值$w^1,w^2$,此时
+$$
+L_1 = |w^1|+|w^2|
+$$
+对于梯度下降法，求解$C_0$的过程可以画出等值线，同时L1正则化的函数也可以在$w^1w^2$的二维平面上画出来。如下图：
 
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-L1L2/1" width="800" height="auto"/></center>
 <font color = 'gray'><center>图1.L1正则化</center></font>
@@ -175,6 +179,4 @@ $$
 
 (2)  https://blog.csdn.net/jinping_shi/article/details/52433975
 
-(3) https://blog.csdn.net/qq_32742009/article/details/81629210?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase
-
-(4)  https://zhuanlan.zhihu.com/p/40814046
+(3)  https://zhuanlan.zhihu.com/p/40814046
