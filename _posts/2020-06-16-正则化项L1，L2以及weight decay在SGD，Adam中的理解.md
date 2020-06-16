@@ -13,8 +13,7 @@ mathjax: true
 
 所谓欠拟合（under-fitting)，与过拟合恰好相反，模型学习的太过粗糙，连训练集中的样本数据特征关系（数据分布）都没有学出来。
 
-<font color = 'blue'>解决过拟合的方法主要有以下几种</font>:
-
+<font color = 'blue'>解决过拟合的方法主要有以下几种</font>
 
 <font color = 'blue'>(1) 数据层面：</font>
 
@@ -35,8 +34,8 @@ mathjax: true
 
 ### 二、正则化方法：防止过拟合，提高模型泛化能力
 
-* L1正则化是指权值向量$w$中各个元素的绝对值之和，通常表示为$\|w\|_1$。
-* L2正则化是指权值向量$w$中各个元素的平方和然后再求平方根，通常表示为$\|w\|_2$
+* L1正则化是指权值向量$w$中各个元素的绝对值之和，通常表示为$\|\|w\|\|_1$。
+* L2正则化是指权值向量$w$中各个元素的平方和然后再求平方根，通常表示为$\|\|w\|\|_2$
 
 
 #### 2.1 为什么L1正则化可以产生稀疏模型（L1是怎么让系数等于0的）
@@ -55,7 +54,7 @@ L_1 = |w^1|+|w^2|
 $$
 对于梯度下降法，求解$C_0$的过程可以画出等值线，同时L1正则化的函数也可以在$w^1w^2$的二维平面上画出来。如下图：
 
-<center><img src="https://mengtingxu1203.github.io/assets/img/blog-L1L2/1" width="800" height="auto"/></center>
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-L1L2/1.jpeg" width="700" height="auto"/></center>
 <font color = 'gray'><center>图1.L1正则化</center></font>
 
 图中等值线是$C_0$的等值线，黑色方形是L1正则函数的图形。
@@ -85,7 +84,7 @@ $$
 
 画出他们在二维平面上的图形：
 
-<center><img src="https://mengtingxu1203.github.io/assets/img/blog-L1L2/2.jpeg" width="800" height="auto"/></center>
+<center><img src="https://mengtingxu1203.github.io/assets/img/blog-L1L2/2.jpeg" width="700" height="auto"/></center>
 <font color = 'gray'><center>图2.L2正则化</center></font>
 
 二维平面下L2正则化的函数图形是个圆（绝对值的平方和，是个圆），与方形相比，被磨去了棱角。因此$C_0$与L2相交时使得$w^1,w^2$等于零的机率小了许多，这就是为什么L2正则化不具有稀疏性的原因，因为不太可能出现多数$w$都为0的情况。
