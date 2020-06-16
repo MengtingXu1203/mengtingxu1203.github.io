@@ -4,6 +4,7 @@ date:  2020-06-16 23:28:13 +0800
 category: 基础知识
 tags: 正则化
 excerpt: L1，L2正则化项防止过拟合
+mathjax: true
 ---
 
 ### 一、解决过拟合问题
@@ -174,6 +175,6 @@ $$
 
 (2)  https://blog.csdn.net/jinping_shi/article/details/52433975
 
-(3)  https://blog.csdn.net/qq_32742009/article/details/81629210?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase
+(3) https://blog.csdn.net/qq_32742009/article/details/81629210?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase
 
 (4)  https://zhuanlan.zhihu.com/p/40814046
