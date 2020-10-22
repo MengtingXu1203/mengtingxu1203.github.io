@@ -23,16 +23,26 @@ $$
 x\in \mathcal{B}_p(x_0,\epsilon),\mathcal{B}_p(x_0,\epsilon):=\{x | \|x-x_0\|_p\leq \epsilon\}
 $$
 
-则以$\epsilon$为界的$L_p$扰动区域经过网络的传递变为一个非凸的扰动区域，在该非凸的扰动区域内存在确定的$\epsilon_{a_i,b_i}$，使网络对其的概率输出为原始给定样本的精确上下界。即$f_i^L(x_0) \leq f_i(x_0) \leq f_i^U(x_0), f_i^L(x_0)=f_i(x_0+\epsilon_{a_i}), f_i^U(x_0)=f_i(x_0+\epsilon_{b_i}), i \in \{1,\cdots,k\}$。
+则以$\epsilon$为界的$L_p$扰动区域经过网络的传递变为一个非凸的扰动区域，在该非凸的扰动区域内存在确定的$\epsilon_{a_i,b_i}$，使网络对其的概率输出为原始给定样本的精确上下界。即
 
-图1.1(c) 表示网络$f$对给定原始图片及其周围扰动区域的<font color = 'blue'>松弛判别</font>过程。事实上，在(b)中网络最后一层的非凸扰动区域内找到确定的$\epsilon_{a,b}$是计算代价十分昂贵，所以采取在网络传递过程中通过一定的松弛策略，将非凸扰动区域松弛为一个凸扰动区域，并在该凸扰动区域内找寻$\epsilon_{a_i\prime,b_i\prime}$，使网络对其的概率输出为原始给定样本的松弛上下界。即$
-f_i^L(x_0) \leq f_i(x_0) \leq f_i^U(x_0)，f_i^L(x_0)=f_i(x_0+\epsilon_{a_i\prime}), f_i^U(x_0)=f_i(x_0+\epsilon_{b_i\prime}), i \in \{1,\cdots,k\}$且$f_i(x_0+\epsilon_{a_i\prime}) \leq f_i(x_0+\epsilon_{a_i})\leq f_i(x_0+\epsilon_{b_i}) \leq f_i(x_0+\epsilon_{b_i\prime})$。
+$$
+f_i^L(x_0) \leq f_i(x_0) \leq f_i^U(x_0), f_i^L(x_0)=f_i(x_0+\epsilon_{a_i}), f_i^U(x_0)=f_i(x_0+\epsilon_{b_i}), i \in \{1,\cdots,k\}.
+$$
+
+图1.1(c) 表示网络$f$对给定原始图片及其周围扰动区域的<font color = 'blue'>松弛判别</font>过程。事实上，在(b)中网络最后一层的非凸扰动区域内找到确定的$\epsilon_{a,b}$是计算代价十分昂贵，所以采取在网络传递过程中通过一定的松弛策略，将非凸扰动区域松弛为一个凸扰动区域，并在该凸扰动区域内找寻$\epsilon_{a_i\prime,b_i\prime}$，使网络对其的概率输出为原始给定样本的松弛上下界。即
+$$
+f_i^L(x_0) \leq f_i(x_0) \leq f_i^U(x_0)，f_i^L(x_0)=f_i(x_0+\epsilon_{a_i\prime}), f_i^U(x_0)=f_i(x_0+\epsilon_{b_i\prime}), i \in \{1,\cdots,k\}$且$f_i(x_0+\epsilon_{a_i\prime}) \leq f_i(x_0+\epsilon_{a_i})\leq f_i(x_0+\epsilon_{b_i}) \leq f_i(x_0+\epsilon_{b_i\prime}).
+$$
 
 
 
 ### 2、验证过程
 
-我们称模型在$x_0$点处具有可验证鲁棒性，即在扰动区域内不存在扰动可以使得模型输出错误的标签，即对于$\forall x \in \mathcal{B}_p(x_0,\epsilon),\mathop {argmax}_{i\in \{1,\cdots,k\}}f_i(x)=y_{true}$。
+我们称模型在$x_0$点处具有可验证鲁棒性，即在扰动区域内不存在扰动可以使得模型输出错误的标签，即对于
+
+$$
+\forall x \in \mathcal{B}_p(x_0,\epsilon),\mathop {argmax}_{i\in \{1,\cdots,k\}}f_i(x)=y_{true}.
+$$
 
 #### 2.1 Certified exact/lower bound
 设$c$是输入$x_0$的正确标签，$j$是攻击标签，则网络对于目标攻击和非目标攻击的certified bound $\hat \epsilon_j$ 和 $\hat \epsilon$可以被定义如下：
@@ -130,7 +140,7 @@ $$
 ay \leq \sigma(y) \leq \frac{u}{u-l}(y-l), \quad 0\leq a \leq 1
 $$
 
-当$a=\frac{u}{u-l}$时，即为Fast-Lin。当$|l| \leq u$ 时，取$a=1$。当$u \lt |l|$时，取a=0。如图4.4所示。
+当$a=\frac{u}{u-l}$时，即为Fast-Lin。当$\|l\| \leq u$ 时，取$a=1$。当$u \lt \|l\|$时，取a=0。如图4.4所示。
 
 <center><img src="https://mengtingxu1203.github.io/assets/img/blog-CerRobustness/CROWN1.png" width="800" height="auto"/></center>
 <font color = 'gray'><center>图4.4 CROWN自适应选择上下界。</center></font>
