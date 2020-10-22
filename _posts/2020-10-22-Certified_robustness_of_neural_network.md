@@ -30,8 +30,13 @@ f_i^L(x_0) \leq f_i(x_0) \leq f_i^U(x_0), f_i^L(x_0)=f_i(x_0+\epsilon_{a_i}), f_
 $$
 
 图1.1(c) 表示网络$f$对给定原始图片及其周围扰动区域的<font color = 'blue'>松弛判别</font>过程。事实上，在(b)中网络最后一层的非凸扰动区域内找到确定的$\epsilon_{a,b}$是计算代价十分昂贵，所以采取在网络传递过程中通过一定的松弛策略，将非凸扰动区域松弛为一个凸扰动区域，并在该凸扰动区域内找寻$\epsilon_{a_i\prime,b_i\prime}$，使网络对其的概率输出为原始给定样本的松弛上下界。即
+
 $$
-f_i^L(x_0) \leq f_i(x_0) \leq f_i^U(x_0)，f_i^L(x_0)=f_i(x_0+\epsilon_{a_i\prime}), f_i^U(x_0)=f_i(x_0+\epsilon_{b_i\prime}), i \in \{1,\cdots,k\}$且$f_i(x_0+\epsilon_{a_i\prime}) \leq f_i(x_0+\epsilon_{a_i})\leq f_i(x_0+\epsilon_{b_i}) \leq f_i(x_0+\epsilon_{b_i\prime}).
+f_i^L(x_0) \leq f_i(x_0) \leq f_i^U(x_0)，f_i^L(x_0)=f_i(x_0+\epsilon_{a_i\prime}), f_i^U(x_0)=f_i(x_0+\epsilon_{b_i\prime}), i \in \{1,\cdots,k\}
+$$
+
+$$
+f_i(x_0+\epsilon_{a_i\prime}) \leq f_i(x_0+\epsilon_{a_i})\leq f_i(x_0+\epsilon_{b_i}) \leq f_i(x_0+\epsilon_{b_i\prime}).
 $$
 
 
